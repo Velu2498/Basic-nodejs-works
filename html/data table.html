@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <table class="table table-sm table-dark">
+        <thead>
+          <tr>
+            <th scope="col">USER NAME</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">PASSWORD</th>
+          </tr>
+        </thead>
+
+        <tbody id="tb">
+ 
+        </tbody>
+      </table>
+</body>
+<script>
+    var xhttp=new XMLHttpRequest();
+
+    xhttp.onreadystatechange= function(){
+        if (this.readyState == 4 && this.status == 200) {
+            JSON.parse(this.responseText).forEach(element => {
+                var tr=document.createElement('tr');
+                var td1=document.createElement('td');
+                td1.innerHTML=element.username;
+                var td2=document.createElement('td');
+                td2.innerHTML=element.email;
+                var td3=document.createElement('td');
+                td3.innerHTML=element.password;
+
+                tr.appendChild(td1)
+                tr.appendChild(td2)
+                tr.appendChild(td3)
+                document.getElementById('tb').appendChild(tr)
+            });
+
+    }
+
+    }
+
+    xhttp.open("GET","http://localhost:3000/data");
+    xhttp.send();
+
+</script>
+</html>
